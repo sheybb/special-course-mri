@@ -35,11 +35,7 @@ data3_rs_balloon_ph = creatingVolume(data_cell_rs, [125;154], 'phase');
 
 %%%%%%%%%%%%%% Visualization balloon %%%%%%%%%%%%%%%%%%
 figure, sliceViewer(data1_rs_balloon_mag, 'DisplayRange', []);
-figure, sliceViewer(data2_rs_balloon_mag, 'DisplayRange', []);
-figure, sliceViewer(data3_rs_balloon_mag, 'DisplayRange', []);
 figure, sliceViewer(data1_rs_balloon_ph, 'DisplayRange', []);
-figure, sliceViewer(data2_rs_balloon_ph, 'DisplayRange', []);
-figure, sliceViewer(data3_rs_balloon_ph, 'DisplayRange', []);
 
 % Create t' series Volumes tube phantom
 data1_rs_tube_mag = creatingVolume(data_cell_rs, [31;50], 'magnitude');
@@ -51,8 +47,23 @@ data3_rs_tube_ph = creatingVolume(data_cell_rs, [71;90], 'phase');
 
 %%%%%%%%%%%%%% Visualization tube %%%%%%%%%%%%%%%%%%
 figure, sliceViewer(data1_rs_tube_mag, 'DisplayRange', []);
-figure, sliceViewer(data2_rs_tube_mag, 'DisplayRange', []);
-figure, sliceViewer(data3_rs_tube_mag, 'DisplayRange', []);
 figure, sliceViewer(data1_rs_tube_ph, 'DisplayRange', []);
-figure, sliceViewer(data2_rs_tube_ph, 'DisplayRange', []);
-figure, sliceViewer(data3_rs_tube_ph, 'DisplayRange', []);
+
+% Create a mask to select the ROI
+% Threshold mask balloon
+mask_th_balloon = create_mask_threshold (data1_rs_balloon_mag, 'balloon');
+figure, sliceViewer(mask_th_balloon, 'DisplayRange', []);
+
+% Threshold mask tube
+mask_th_tube = create_mask_threshold (data1_rs_tube_mag, 'tube');
+figure, sliceViewer(mask_th_tube, 'DisplayRange', []);
+
+%%%%%%%%%%%%% Processing part %%%%%%%%%%%%%%%%%%
+close all
+clc
+% 1. Apply the mask to the phase images to remove the background
+for i = 1:length(phases_cell)
+    apply_mask = @(vol)(masks_th{i} .* vol);
+    phases_cell_r = cellfun(apply_mask, phases_cell_double, 'UniformOutput',false);
+end
+figure, sliceViewer(phases_cell_r{2});
