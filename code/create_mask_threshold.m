@@ -29,8 +29,8 @@ function V_mask = create_mask_threshold (magnitude_V,data)
             marker(263,268) = true;
             mask = imreconstruct(marker, mask_init);
             mask = imfill(mask,'holes');
-            se = strel('disk',10);
-            mask = imdilate(mask,se);
+%             se = strel('disk',10);
+%             mask = imdilate(mask,se);
         end
         V_mask(:,:,i) = mask;
     end
