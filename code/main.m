@@ -96,14 +96,15 @@ phase_difference_data3_tube = correcting_phases(data_rs_tube_ph_no_background{3}
 % figure, sliceViewer(phase_difference_data1_balloon, 'DisplayRange', [-1 1]);
 
 %% %%%%%%%%%%%% Temperature change %%%%%%%%%%%%%%%%%%%
-close all, clc
+close all
+clc
 
 diff_phase_tube = phase_difference_data3_tube - phase_difference_data1_tube;
-% diff_phase_tube(diff_phase_tube<0) = diff_phase_tube(diff_phase_tube<0) + 2*pi;
+% diff_phase_tube(diff_phase_tube<-0.1745) = diff_phase_tube(diff_phase_tube<-0.1745) + 2*pi;
 % Pass to degrees
 % diff_phase_tube = diff_phase_tube*180/pi;
 
-alpha = 0.01 ;  % emperature dependent coefficient (ppm/°C)
+alpha = 0.01 ;  % temperature dependent coefficient (ppm/°C)
 Bo = 3;
 gamma = 42.6;
 fo  =  gamma* Bo;
@@ -115,7 +116,7 @@ figure,  imagesc(var_T_tube(:,:,6));
 colorbar;
 
 diff_phase_balloon = phase_difference_data3_balloon - phase_difference_data1_balloon;
-diff_phase_balloon(diff_phase_balloon<0) = diff_phase_balloon(diff_phase_balloon<0) + 2*pi;
+% diff_phase_balloon(diff_phase_balloon<-0.1745) = diff_phase_balloon(diff_phase_balloon<-0.1745) + 2*pi;
 % Pass to degrees
 % diff_phase_balloon = diff_phase_balloon*180/pi;
 
@@ -146,7 +147,10 @@ for i = 1:size(var_T_tube,3)-1
     j = j + 1;
 end
 
-%%%%%% Figure on top of magnitude image %%%%%%%%%
+%% %%%%%% Figure on top of magnitude image %%%%%%%%%
+close all
+clc
+
 create_directory(strcat(path_program, '\results\figures\'),idx);
 
 figure,
