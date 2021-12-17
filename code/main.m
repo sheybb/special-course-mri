@@ -204,3 +204,119 @@ subplot(1,2,2)
 imagesc(var_T_tube(:,:,6)) 
 % caxis([-0.5 0.5]);
 colorbar;
+
+%% Temperature plots over the time to evaluate the respone to heating
+% Pixel to consider: [255,259] 
+temp_change_px_prev = phase_difference_data1_tube(259,255,:);
+for i = 1:length(temp_change_px_prev)
+    temp_change_px_vector(i) = temp_change_px_prev(1,1,i);
+end
+figure, plot(temp_change_px_vector)
+
+temp_change_px_heating = phase_difference_data2_tube(259,255,:);
+for i = 1:length(temp_change_px_heating)
+    temp_change_px_vector_heating(i) = temp_change_px_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_heating)
+
+temp_change_px_after_heating = phase_difference_data3_tube(259,255,:);
+for i = 1:length(temp_change_px_after_heating)
+    temp_change_px_vector_after_heating(i) = temp_change_px_after_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_after_heating)
+
+temp_change_1 = cat(2, temp_change_px_vector,temp_change_px_vector_heating,temp_change_px_vector_after_heating);
+figure, plot(temp_change_1)
+title('Tª change over pixel 259,255')
+
+
+%% Pixel to consider: [257,253] 
+temp_change_px_prev = phase_difference_data1_tube(253,257,:);
+for i = 1:length(temp_change_px_prev)
+    temp_change_px_vector(i) = temp_change_px_prev(1,1,i);
+end
+figure, plot(temp_change_px_vector)
+
+temp_change_px_heating = phase_difference_data2_tube(253,257,:);
+for i = 1:length(temp_change_px_heating)
+    temp_change_px_vector_heating(i) = temp_change_px_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_heating)
+
+temp_change_px_after_heating = phase_difference_data3_tube(253,257,:);
+for i = 1:length(temp_change_px_after_heating)
+    temp_change_px_vector_after_heating(i) = temp_change_px_after_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_after_heating)
+
+temp_change_2 = cat(2, temp_change_px_vector,temp_change_px_vector_heating,temp_change_px_vector_after_heating);
+figure, plot(temp_change_2)
+title('Tª change over pixel 257,253')
+
+%% Pixel to consider: [257,251] 
+temp_change_px_prev = phase_difference_data1_tube(251,257,:);
+for i = 1:length(temp_change_px_prev)
+    temp_change_px_vector(i) = temp_change_px_prev(1,1,i);
+end
+
+temp_change_px_heating = phase_difference_data2_tube(251,257,:);
+for i = 1:length(temp_change_px_heating)
+    temp_change_px_vector_heating(i) = temp_change_px_heating(1,1,i);
+end
+
+temp_change_px_after_heating = phase_difference_data3_tube(251,257,:);
+for i = 1:length(temp_change_px_after_heating)
+    temp_change_px_vector_after_heating(i) = temp_change_px_after_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_after_heating)
+
+temp_change_3 = cat(2, temp_change_px_vector,temp_change_px_vector_heating,temp_change_px_vector_after_heating);
+figure, plot(temp_change_3)
+title('Tª change over pixel 257,251')
+
+%% Pixel to consider: [258,251] 
+temp_change_px_prev = phase_difference_data1_tube(251,258,:);
+for i = 1:length(temp_change_px_prev)
+    temp_change_px_vector(i) = temp_change_px_prev(1,1,i);
+end
+
+temp_change_px_heating = phase_difference_data2_tube(251,258,:);
+for i = 1:length(temp_change_px_heating)
+    temp_change_px_vector_heating(i) = temp_change_px_heating(1,1,i);
+end
+
+temp_change_px_after_heating = phase_difference_data3_tube(251,258,:);
+for i = 1:length(temp_change_px_after_heating)
+    temp_change_px_vector_after_heating(i) = temp_change_px_after_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_after_heating)
+
+temp_change_4 = cat(2, temp_change_px_vector,temp_change_px_vector_heating,temp_change_px_vector_after_heating);
+figure, plot(temp_change_4)
+title('Tª change over pixel 258,251')
+
+%% Pixel to consider: [267,267] 
+temp_change_px_prev = phase_difference_data1_tube(267,267,:);
+for i = 1:length(temp_change_px_prev)
+    temp_change_px_vector(i) = temp_change_px_prev(1,1,i);
+end
+
+temp_change_px_heating = phase_difference_data2_tube(267,267,:);
+for i = 1:length(temp_change_px_heating)
+    temp_change_px_vector_heating(i) = temp_change_px_heating(1,1,i);
+end
+
+temp_change_px_after_heating = phase_difference_data3_tube(267,267,:);
+for i = 1:length(temp_change_px_after_heating)
+    temp_change_px_vector_after_heating(i) = temp_change_px_after_heating(1,1,i);
+end
+figure, plot(temp_change_px_vector_after_heating)
+
+temp_change_5 = cat(2, temp_change_px_vector,temp_change_px_vector_heating,temp_change_px_vector_after_heating);
+figure, plot(temp_change_5)
+title('Tª change over pixel 258,251')
+%% Mean tº change
+temp_change = [temp_change_1; temp_change_2; temp_change_3; temp_change_4; temp_change_5];
+temp_change = mean(temp_change,1);
+figure, plot(temp_change)
+title('Tª change over the time')
